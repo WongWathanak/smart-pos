@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMART — Login</title>
+  <link rel="icon" href="assets/images/smart_logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-root=".">
+  <main class="login-page">
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="login-logo">
+        <img src="assets/images/smart_logo.png" alt="SMART — Sales Management and Retail Tracking" width="380" height="380">
+      </div>
+
+      <form class="login-form" id="login-form" novalidate>
+        <h1 id="login-title">Welcome to SMART!</h1>
+        <p class="card-sub" style="margin:0 0 12px">Sign in to continue</p>
+
+        <span class="label" id="role-label">Login as</span>
+        <div class="segmented" role="group" aria-labelledby="role-label">
+          <button type="button" data-role="admin" aria-pressed="true">1 · ADMIN</button>
+          <button type="button" data-role="cashier" aria-pressed="false">2 · CASHIER</button>
+        </div>
+        <p class="hint" id="role-hint">Sales history, daily summary and product management</p>
+
+        <div class="field">
+          <label class="label" for="username">Username</label>
+          <input class="input" id="username" name="username" autocomplete="username" placeholder="Enter your username" required>
+        </div>
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <input class="input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+        </div>
+        <p class="msg" id="login-msg" role="alert" aria-live="assertive"></p>
+
+        <div class="grow"></div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit" id="login-btn">Login</button>
+        <p class="connection" id="connection"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/validation.js"></script>
+  <script src="js/preview-data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pages/login.js"></script>
+</body>
+</html>

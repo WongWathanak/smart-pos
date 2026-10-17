@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMART — Manage Products</title>
+  <link rel="icon" href="../assets/images/smart_logo.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="..">
+<div class="page">
+  <div class="app-frame">
+    <header class="app-header" id="app-header"></header>
+    <div id="preview-banner"></div>
+    <div class="app-body">
+      <nav class="sidebar" id="sidebar" aria-label="Main"></nav>
+
+      <main class="content split" id="main">
+        <!-- 1. View all products -->
+        <section class="card tall" aria-labelledby="products-title">
+          <div class="card-head">
+            <div>
+              <h1 class="card-title" id="products-title">Products</h1>
+              <p class="card-sub" id="products-sub">Loading…</p>
+            </div>
+            <span class="spacer"></span>
+            <label class="visually-hidden" for="filter">Show</label>
+            <select class="select" id="filter">
+              <option value="all">All products</option>
+              <option value="low">Low stock</option>
+              <option value="out">Out of stock</option>
+            </select>
+            <button class="btn btn-primary" type="button" id="new-btn"><span data-icon="plus"></span> New product</button>
+          </div>
+          <p class="msg" id="list-msg" role="alert" style="padding:0 28px"></p>
+          <div class="table-wrap">
+            <table class="table selectable" id="products-table">
+              <thead><tr>
+                <th scope="col" data-sort="id">ID</th>
+                <th scope="col" data-sort="name">Product</th>
+                <th scope="col" data-sort="price">Price</th>
+                <th scope="col" data-sort="stock">Stock</th>
+                <th scope="col">Status</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 2. Add a new product / 3. Update stock/price -->
+        <section class="card tall card-pad" aria-labelledby="form-title">
+          <form class="form-stack" id="product-form" novalidate style="height:100%">
+            <div>
+              <h2 class="card-title" id="form-title">New Product</h2>
+              <p class="hint" id="form-hint"></p>
+            </div>
+            <div class="field">
+              <label class="label" for="f-id">Product ID</label>
+              <input class="input" id="f-id" name="id" maxlength="20" autocomplete="off" placeholder="e.g. 0152" aria-describedby="e-id">
+              <span class="msg error" id="e-id"></span>
+            </div>
+            <div class="field">
+              <label class="label" for="f-name">Name</label>
+              <input class="input" id="f-name" name="name" maxlength="40" autocomplete="off" placeholder="e.g. orange_juice" aria-describedby="e-name h-name">
+              <span class="hint" id="h-name">One word — use _ instead of spaces.</span>
+              <span class="msg error" id="e-name"></span>
+            </div>
+            <div class="field">
+              <label class="label" for="f-price">Price (USD)</label>
+              <input class="input" id="f-price" name="price" type="number" min="0.01" step="0.01" inputmode="decimal" aria-describedby="e-price">
+              <span class="msg error" id="e-price"></span>
+            </div>
+            <div class="field">
+              <label class="label" for="f-stock">Stock (units)</label>
+              <input class="input" id="f-stock" name="stock" type="number" min="0" step="1" inputmode="numeric" aria-describedby="e-stock">
+              <span class="msg error" id="e-stock"></span>
+            </div>
+            <p class="msg" id="form-msg" role="status" aria-live="polite"></p>
+            <div style="flex:1"></div>
+            <button class="btn btn-primary btn-block" type="submit" id="save-btn"><span data-icon="check"></span> <span id="save-label">Add product</span></button>
+            <button class="btn btn-secondary btn-block" type="button" id="clear-btn">Clear form</button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="../js/validation.js"></script>
+<script src="../js/preview-data.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/pages/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+# SMART POS — Web Frontend (HTML, CSS, vanilla JavaScript)
+
+Frontend for **SMART — Sales Management and Retail Tracking**.
+No Qt, no frameworks, no build step, no external libraries.
+Your C++ backend and `.txt` files are **not** included and are never modified.
+
+![Dashboard](docs/screenshots/preview_dashboard.png)
+
+## Read this first: how it connects to your backend
+
+Your backend (`main.cpp`) is a console program that talks through `cin`/`cout`.
+A browser **cannot** run it or open its `.txt` files directly, and it has no
+HTTP API today. So this frontend has two modes, set in `config/config.json`:
+
+| `apiMode`   | What happens                                                                 |
+|-------------|------------------------------------------------------------------------------|
+| `"preview"` (default) | Built-in **sample data** (`sample_bread`, …). A yellow **PREVIEW MODE** banner is shown. Add/Save/Complete sale are disabled. **Nothing is saved.** |
+| `"http"`    | Calls the API in **`docs/API_CONTRACT.md`** at `apiBaseUrl`. Every endpoint maps to a function in your `main.cpp` (login, view sales history, daily summary, manage products, cashier sale). |
+
+**The real API does not exist yet.** To use real data, a small HTTP layer that
+follows `docs/API_CONTRACT.md` is needed. Two ways, both need your OK:
+
+1. **Bridge program, backend untouched** — a local server that runs your compiled
+   backend and answers its menus (same idea as the earlier Qt version).
+2. **Add HTTP to `main.cpp`** — changes your backend.
+
+The frontend won't need changes either way.
+
+## Pages (mapped to your backend menus)
+
+| Page | File | Backend function |
+|------|------|------------------|
+| Login | `index.html` | welcome menu `1` ADMIN / `2` CASHIER → `login_admin()` / `login_cashier()` |
+| Daily Summary (dashboard) | `pages/dashboard.html` | `view_daily_summary()` + `view_sales_history()` + product list |
+| Sales History | `pages/sales.html` | `view_sales_history()` |
+| Manage Products | `pages/products.html` | `managing_product()` 1 view · 2 add · 3 update price/stock |
+| New Sale | `pages/cashier.html` | `cashier_mainMenu()` |
+| Log out | sidebar button | admin menu `4` |
+
+Admins see the first three; cashiers only see New Sale (same as the backend).
+There is **no delete** button because your backend has no delete option.
+
+Checks done in the browser before sending (they follow how your backend reads
+input): names and IDs without spaces or commas (`cin >>` + comma-separated
+file — use `_`), ID `0` not allowed (cashier uses 0 to finish), duplicate IDs,
+max 150 products, max 100 cart lines, quantity > 0 and ≤ stock, and money
+given ≥ total (your console backend doesn't check that one).
+
+## Design
+
+- Layout follows your reference screenshot: header (logo, menu, search, bell,
+  user), round icon sidebar, KPI cards, sales chart, donut, inventory alerts,
+  tables with status pills.
+- Light theme (white background, navy/blue text, logo green buttons).
+  Colours are taken from the logo and defined once in `css/style.css` (`:root`).
+- Reference cards your backend has no data for show real data instead of fake
+  numbers: *Payment Methods* → **Stock Status**, *Employee performance* → **Recent Sales**.
+  Your sales file has no dates, so the chart is per sale, not per day.
+
+## Folder layout
+
+```text
+SMART_Frontend/
+├── index.html               login
+├── pages/                   dashboard, sales, products, cashier
+├── css/
+│   ├── style.css            colour tokens (from the logo), base, header/sidebar shell, login
+│   ├── components.css       cards, buttons, forms, tables, pills, charts, dialogs
+│   └── responsive.css       smaller desktop windows
+├── js/
+│   ├── app.js               start-up: config, session check, role check
+│   ├── navigation.js        header + sidebar, search, bell, logout
+│   ├── api.js               ALL data access (preview or http) — the only file to touch for integration
+│   ├── ui.js                icons, formatting, dialogs, toasts, tables
+│   ├── validation.js        input checks + money display maths
+│   ├── charts.js            line chart and donut (inline SVG)
+│   ├── preview-data.js      sample data for Preview mode only
+│   └── pages/               one script per page
+├── config/config.json       apiMode, apiBaseUrl, limits
+├── assets/images/smart_logo.png   your logo, unmodified
+├── docs/API_CONTRACT.md     the endpoints a SMART API must provide
+├── docs/screenshots/
+└── tests/
+    ├── unit.test.js             Node tests: validation, money, api.js
+    ├── e2e_test.py              browser tests (Playwright)
+    └── contract-stub-server.js  TEST-ONLY fake API for the browser tests
+```
+
+## Run it
+
+See **build_instructions.txt**. Quickest:
+
+- **Look at it:** double-click `index.html` → Preview mode, any username/password.
+- **Proper way:** in the `SMART_Frontend` folder run `python -m http.server 8000`
+  and open <http://localhost:8000>.
+
+## What was tested (headless Chromium 141, Node 22, Ubuntu)
+
+- `node --test tests/unit.test.js` — 8 tests pass (validation, money maths,
+  preview refuses every write, http requests/headers/errors with a fake fetch).
+- `python tests/e2e_test.py` — 40 browser checks pass, no console errors:
+  - Preview mode: login validation, redirects, role guard, every page, search,
+    sorting, low-stock bell, cart add/remove/clear, USD/KHR change,
+    save and complete-sale disabled, logout, 1100px window.
+  - `"http"` mode against **`tests/contract-stub-server.js`**, a test-only fake API:
+    API login errors, dashboard numbers, add/update product, a full sale with
+    receipt, stock reload, and an API error keeping the cart.
+- Opening `index.html` from disk works in Preview mode.
+
+**Not tested: your real C++ backend.** There is no HTTP API for it yet, so
+real integration is unverified until one exists that follows the contract.

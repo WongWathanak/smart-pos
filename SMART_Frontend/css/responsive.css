@@ -1,0 +1,36 @@
+/*
+ * responsive.css — keeps the reference layout usable when the desktop window
+ * is made smaller. The design target is a full-HD desktop (1440–1920px wide).
+ */
+
+@media (max-width: 1360px) {
+  .stat-value { font-size: 24px; }
+  .search { width: min(320px, 30vw); }
+}
+
+@media (max-width: 1180px) {
+  /* right column moves under the left one */
+  .dash, .split { grid-template-columns: minmax(0, 1fr); }
+  .split .tall { height: auto; min-height: 0; }
+  .split .tall .table-wrap { max-height: 520px; }
+  .dash-right { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .user-chip .user-text { display: none; }
+}
+
+@media (max-width: 900px) {
+  :root { --sidebar-w: 84px; --header-h: 80px; }
+  .page { padding: 12px; }
+  .kpis { grid-template-columns: minmax(0, 1fr); }
+  .dash-right { grid-template-columns: minmax(0, 1fr); }
+  .brand-text { display: none; }
+  .logo-tile, .logo-tile img { width: 60px; height: 60px; }
+  .login-card { grid-template-columns: 1fr; }
+  .login-logo { border-right: 0; border-bottom: 1px solid var(--border); }
+  .login-logo img { width: 260px; height: 260px; }
+  .entry-row { grid-template-columns: 1fr 1fr; }
+  .entry-row .btn { grid-column: 1 / -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

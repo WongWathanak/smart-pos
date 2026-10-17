@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMART — Sales History</title>
+  <link rel="icon" href="../assets/images/smart_logo.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="..">
+<div class="page">
+  <div class="app-frame">
+    <header class="app-header" id="app-header"></header>
+    <div id="preview-banner"></div>
+    <div class="app-body">
+      <nav class="sidebar" id="sidebar" aria-label="Main"></nav>
+
+      <main class="content split" id="main">
+        <section class="card tall" aria-labelledby="sales-title">
+          <div class="card-head">
+            <div>
+              <h1 class="card-title" id="sales-title">Sales History</h1>
+              <p class="card-sub" id="sales-sub">Loading…</p>
+            </div>
+            <span class="spacer"></span>
+            <button class="btn btn-secondary" type="button" id="reload-btn"><span data-icon="refresh"></span> Reload</button>
+          </div>
+          <p class="msg" id="sales-msg" role="alert" style="padding:0 28px"></p>
+          <div class="table-wrap">
+            <table class="table selectable" id="sales-table">
+              <thead><tr>
+                <th scope="col" data-sort="number">Sale</th>
+                <th scope="col">Products</th>
+                <th scope="col" data-sort="items">Qty</th>
+                <th scope="col" data-sort="totalUsd">Total (USD)</th>
+                <th scope="col" data-sort="totalUsd">Total (KHR)</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card tall card-pad" aria-labelledby="detail-title">
+          <h2 class="card-title" id="detail-title">Sale</h2>
+          <p class="card-sub" style="margin-bottom:12px">As stored in sales_history.txt</p>
+          <pre class="receipt-text" id="detail" aria-live="polite">Select a sale.</pre>
+        </section>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="../js/validation.js"></script>
+<script src="../js/preview-data.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/pages/sales.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "apiMode": "preview",
+  "apiBaseUrl": "http://localhost:8080/api",
+  "requestTimeoutMs": 8000,
+  "khrPerUsd": 4000,
+  "maxProducts": 150,
+  "maxCartItems": 100,
+  "lowStockLimit": 10
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMART — New Sale</title>
+  <link rel="icon" href="../assets/images/smart_logo.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="..">
+<div class="page">
+  <div class="app-frame">
+    <header class="app-header" id="app-header"></header>
+    <div id="preview-banner"></div>
+    <div class="app-body">
+      <nav class="sidebar" id="sidebar" aria-label="Main"></nav>
+
+      <main class="content split" id="main">
+        <!-- Product entry -->
+        <section class="card tall" aria-labelledby="sale-title">
+          <div class="card-head">
+            <div>
+              <h1 class="card-title" id="sale-title">New Sale</h1>
+              <p class="card-sub">Enter a Product ID (or click a product), choose the quantity, then Add to cart.</p>
+            </div>
+          </div>
+          <form class="entry-row" id="entry-form" novalidate>
+            <div class="field">
+              <label class="label" for="product-id">Product ID</label>
+              <input class="input" id="product-id" autocomplete="off" placeholder="e.g. 0001" list="product-ids">
+              <datalist id="product-ids"></datalist>
+            </div>
+            <div class="field">
+              <label class="label" for="qty">Quantity</label>
+              <input class="input" id="qty" type="number" min="1" step="1" value="1" inputmode="numeric">
+            </div>
+            <button class="btn btn-primary" type="submit" id="add-btn"><span data-icon="cart"></span> Add to cart</button>
+          </form>
+          <p class="msg" id="entry-msg" role="status" aria-live="polite" style="padding:10px 28px 4px"></p>
+          <div class="table-wrap">
+            <table class="table selectable" id="catalog">
+              <thead><tr>
+                <th scope="col" data-sort="id">ID</th>
+                <th scope="col" data-sort="name">Product</th>
+                <th scope="col" data-sort="price">Price</th>
+                <th scope="col" data-sort="available">Available</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="card-note" id="catalog-note">Stock shown here is for guidance; the backend checks it again when the sale is completed.</p>
+        </section>
+
+        <!-- Cart + payment -->
+        <section class="card glow tall" aria-labelledby="cart-title">
+          <div class="card-head"><h2 class="card-title" id="cart-title">Cart</h2></div>
+          <div class="table-wrap">
+            <table class="table" id="cart">
+              <thead><tr><th scope="col">Product</th><th scope="col">Qty</th><th scope="col">Subtotal</th><th scope="col"><span class="visually-hidden">Remove</span></th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="form-stack" style="padding:14px 28px 24px">
+            <div class="totals">
+              <div><div class="label">TOTAL DUE</div><div class="big-number" id="total-usd" aria-live="polite">$0.00</div></div>
+              <div class="card-sub" id="total-khr" style="font-size:17px">KHR 0</div>
+            </div>
+            <p class="hint" id="rate"></p>
+
+            <span class="label" id="money-type-label">Given money type</span>
+            <div class="segmented" role="group" aria-labelledby="money-type-label">
+              <button type="button" data-currency="USD" aria-pressed="true">1 · USD ($)</button>
+              <button type="button" data-currency="KHR" aria-pressed="false">2 · KHR</button>
+            </div>
+            <div class="field">
+              <label class="label" for="given">Given money (<span id="given-unit">USD</span>)</label>
+              <input class="input" id="given" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00">
+            </div>
+            <div class="change-grid" aria-live="polite">
+              <span class="card-sub">Change (USD)</span><span class="v" id="change-usd">$0.00</span>
+              <span class="card-sub">Change (KHR)</span><span class="v" id="change-khr">KHR 0</span>
+            </div>
+            <p class="msg" id="pay-msg" role="alert"></p>
+            <button class="btn btn-primary btn-block btn-lg" type="button" id="complete-btn" disabled><span data-icon="check"></span> Complete sale</button>
+            <button class="btn btn-secondary btn-block" type="button" id="clear-btn" disabled>Clear cart</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="../js/validation.js"></script>
+<script src="../js/preview-data.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/pages/cashier.js"></script>
+</body>
+</html>

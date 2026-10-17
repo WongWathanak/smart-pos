@@ -1,0 +1,60 @@
+SMART POS WEB FRONTEND — HOW TO RUN
+===================================
+
+There is nothing to compile. You only need a web browser
+(Chrome, Edge or Firefox). Python or Node is only needed for a local server.
+
+
+1. QUICK LOOK (Preview mode, sample data)
+-----------------------------------------
+- Extract SMART_Frontend.zip
+- Double-click index.html
+- Log in with any username and password (Preview mode doesn't check them)
+- Nothing you do is saved.
+
+
+2. RUN WITH A LOCAL SERVER (recommended)
+----------------------------------------
+Browsers block config/config.json when a page is opened from disk, so use a
+small local server. In a terminal (Windows: Command Prompt or PowerShell):
+
+    cd C:\path\to\SMART_Frontend
+    python -m http.server 8000
+
+(or, with Node:  npx http-server -p 8000)
+
+Open http://localhost:8000 in the browser. Stop the server with Ctrl+C.
+
+
+3. CONNECT A REAL SMART API (when one exists)
+---------------------------------------------
+Edit config/config.json (nano works fine):
+
+    "apiMode": "http",
+    "apiBaseUrl": "http://localhost:8080/api"
+
+The API must follow docs/API_CONTRACT.md and allow requests from the page
+(CORS: Access-Control-Allow-Origin, -Headers: Content-Type, Authorization).
+Reload the page. The yellow PREVIEW MODE label disappears and the login is
+checked by the API.
+
+Your C++ backend does not have this API yet — see "How to provide this API"
+at the end of docs/API_CONTRACT.md. Nothing in this folder changes your
+backend or your .txt files.
+
+
+4. TESTS (optional)
+-------------------
+Unit tests (Node 18+):
+    node --test tests/unit.test.js
+
+Browser tests (Python 3 + Node):
+    pip install playwright
+    python -m playwright install chromium
+    python tests/e2e_test.py
+    python tests/e2e_test.py screenshots      (also saves screenshots)
+
+Try the "http" mode by hand against the TEST-ONLY fake API:
+    node tests/contract-stub-server.js
+    open http://localhost:8790   (admin / 123123 or cashier / 123123)
+This fake API keeps its data in memory only. It is NOT your backend.

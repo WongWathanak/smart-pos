@@ -1,0 +1,101 @@
+0001,bread,2,10
+0002,water,1,42
+0003,chip,1.5,10
+0004,milk,2.5,33
+0005,eggs,3,10
+0006,rice,5,48
+0007,sugar,1.8,22
+0008,salt,0.8,37
+0009,cooking oil,4,15
+0010,instant noodles,0.75,50
+0011,bottled juice,1.5,28
+0012,soft drink,1,45
+0013,coffee,3.5,12
+0014,tea,2,30
+0015,butter,2.5,19
+0016,cheese,3,24
+0017,yogurt,1.2,38
+0018,flour,2,41
+0019,pasta,1.8,27
+0020,canned tuna,2.5,16
+0021,canned sardines,1.5,35
+0022,tomato sauce,2,44
+0023,soy sauce,1.5,21
+0024,fish sauce,1.2,14
+0025,ketchup,2,32
+0026,mayonnaise,2.5,9
+0027,biscuits,1.5,47
+0028,cookies,2,26
+0029,chocolate,2.5,39
+0030,candy,0.5,50
+0031,potato chips,1.5,23
+0032,crackers,1,31
+0033,peanuts,1.2,17
+0034,popcorn,1.5,40
+0035,apples,2,29
+0036,bananas,1.5,46
+0037,oranges,2,13
+0038,mangoes,2.5,34
+0039,potatoes,2,43
+0040,onions,1.5,20
+0041,garlic,1,36
+0042,tomatoes,2,25
+0043,carrots,1.5,11
+0044,cabbage,1.8,49
+0045,cucumbers,1.2,18
+0046,lettuce,1.5,22
+0047,chicken,5,15
+0048,pork,6,27
+0049,beef,8,19
+0050,fish,4,33
+0051,shrimp,7,24
+0052,sausages,3,38
+0053,instant coffee,2.5,41
+0054,powdered milk,3,28
+0055,bottled water,0.5,45
+0056,laundry detergent,4,16
+0057,dishwashing liquid,2,35
+0058,hand soap,1.5,42
+0059,shampoo,3,21
+0060,toothpaste,2,30
+0061,toilet paper,2.5,48
+0062,tissues,1.5,14
+0063,toothbrush,1,37
+0064,trash bags,2,23
+0065,batteries,3,44
+0066,matches,0.5,50
+0067,candles,1,26
+0068,sponges,1,32
+0069,paper towels,2,17
+0070,aluminum foil,2.5,39
+0071,plastic wrap,2,12
+0072,frozen vegetables,3,47
+0073,ice cream,4,29
+0074,frozen pizza,5,20
+0075,honey,4,36
+0076,peanut butter,3.5,13
+0077,jam,2.5,43
+0078,breakfast cereal,3,25
+0079,oats,2.5,34
+0080,baking powder,1.2,40
+0081,black pepper,1.5,18
+0082,chili sauce,2,31
+0083,coconut milk,1.5,22
+0084,mineral water,1,49
+0085,energy drink,2,27
+0086,green tea,2,38
+0087,fresh milk,2.5,15
+0088,condensed milk,1.8,46
+0089,tofu,1.5,24
+0090,mushrooms,2.5,33
+0091,corn,1.5,42
+0092,green beans,2,19
+0093,spinach,1.8,35
+0094,pumpkin,2,21
+0095,lemons,1.5,45
+0096,limes,1,28
+0097,watermelon,3,16
+0098,pineapple,2.5,37
+0099,grapes,4,20
+0100,strawberries,5,40
+0151,apple_juice,12,10

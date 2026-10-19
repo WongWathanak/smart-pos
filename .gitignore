@@ -2,6 +2,6 @@
 *.exe
 *.o
 __pycache__/
-smart_backend
+/SMART_backend/smart_backend
 .DS_Store
 EOF

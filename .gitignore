@@ -1,5 +1,7 @@
-﻿*.exe
+﻿cat > .gitignore << 'EOF'
+*.exe
 *.o
 __pycache__/
-SMART_backend/admin_login.txt
-SMART_backend/cashier_login.txt
+smart_backend
+.DS_Store
+EOF

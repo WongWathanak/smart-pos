@@ -613,7 +613,8 @@ class Handler(BaseHTTPRequestHandler):
             with open(os.path.join(self.frontend, "config", "config.json"), encoding="utf-8") as f:
                 cfg = json.load(f)
             host = self.headers.get("Host") or f"localhost:{self.server.server_port}"
-            cfg.update({"apiMode": "http", "apiBaseUrl": f"http://{host}/api"})
+            proto = self.headers.get("X-Forwarded-Proto", "http")
+            cfg.update({"apiMode": "http", "apiBaseUrl": f"{proto}://{host}/api"})
             return self._json(200, cfg)
         rel = "index.html" if path in ("", "/") else unquote(path).lstrip("/")
         full = os.path.realpath(os.path.join(self.frontend, rel))
@@ -645,7 +646,8 @@ def main():
     ap.add_argument("--data", help="folder with product.txt etc. (default: the backend's folder)")
     ap.add_argument("--frontend", default=os.path.join(here, "..", "SMART_Frontend"),
                     help="SMART_Frontend folder (default ../SMART_Frontend)")
-    ap.add_argument("--port", type=int, default=8080)
+    ap.add_argument("--port", type=int, default=int(os.environ.get("PORT", 8080)))
+    ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--verbose", action="store_true", help="log requests and backend output")
     a = ap.parse_args()
 
@@ -675,7 +677,7 @@ def main():
 
     Handler.backend = Backend(exe, data)
     Handler.frontend = front
-    srv = ThreadingHTTPServer(("127.0.0.1", a.port), Handler)   # this computer only
+    srv = ThreadingHTTPServer((a.host, a.port), Handler) 
     srv.verbose = a.verbose
     print(f"SMART bridge running.\n  Backend : {exe}\n  Data    : {data}\n  Frontend: {front}\n"
           f"\n  Open http://localhost:{a.port} in your browser.  Press Ctrl+C to stop.")
